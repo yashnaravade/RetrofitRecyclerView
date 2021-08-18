@@ -27,11 +27,15 @@ class CustomAdapter(val newArticleList: List<Article>): RecyclerView.Adapter<Cus
             .load(article.urlToImage)
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_foreground)
-            .into(holder.ivArticle);
+            .into(holder.ivArticle)
 
         holder.cardNewsItem.setOnClickListener {
             val intent =  Intent(holder.cardNewsItem.context, DetailedNews::class.java)
-
+            intent.putExtra("imageUrl", article.urlToImage)
+            intent.putExtra("headLine", article.title)
+            intent.putExtra("author", article.author)
+            intent.putExtra("description", article.description)
+            intent.putExtra("articleURL", article.url)
             holder.cardNewsItem.context.startActivity(intent)
         }
 
